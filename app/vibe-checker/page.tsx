@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function VibeChecker() {
   const [text, setText] = useState("");
@@ -37,37 +40,57 @@ export default function VibeChecker() {
   };
 
   return (
-    <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
-      <h1 className="text-2xl font-bold mb-4">Vibe Checker</h1>
-      <h2 className="mb-4">
-        Analyze your text and get a response if the vibe is positive, negative,
-        or neutral.
-      </h2>
+    <div className="min-h-screen bg-background p-8">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-bold mb-8 text-center">Vibe Checker</h1>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <textarea
-          className="w-full p-2 border border-zinc-300 dark:border-zinc-800 rounded shadow-xl dark:bg-zinc-900"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Enter text to analyze..."
-          rows={6}
-        />
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle>Analyze Your Text</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <Textarea
+                value={text}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                  setText(e.target.value)
+                }
+                placeholder="Enter text to analyze..."
+                className="min-h-[200px]"
+              />
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
-        >
-          {loading ? "Analyzing..." : "Analyze Text"}
-        </button>
-      </form>
+              <Button
+                type="submit"
+                className="w-full cursor-pointer"
+                disabled={loading}
+              >
+                {loading ? "Analyzing..." : "Analyze Text"}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
 
-      {result && (
-        <div className="mt-4 p-4 border border-zinc-300 dark:border-zinc-800 rounded">
-          <h2 className="font-semibold mb-2">Result:</h2>
-          <p className="capitalize">{result}</p>
-        </div>
-      )}
+        {result && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Analysis Result</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div
+                className={`text-lg font-medium capitalize ${
+                  result === "positive"
+                    ? "text-green-600"
+                    : result === "negative"
+                    ? "text-red-600"
+                    : "text-yellow-600"
+                }`}
+              >
+                {result}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+      </div>
     </div>
   );
 }
