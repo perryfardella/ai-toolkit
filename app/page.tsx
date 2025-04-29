@@ -7,6 +7,7 @@ export default function Home() {
     <div>
       <h1>Welcome to the AI Toolkit</h1>
       <Link href="/chat">Chat</Link>
+      <Link href="/vibe-checker">Vibe Checker</Link>
     </div>
   );
 }
