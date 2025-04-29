@@ -11,15 +11,11 @@ export async function POST(req: Request) {
     });
   }
 
-  console.log("Generating embedding for text:", text);
-
   try {
     const { embedding } = await embed({
       model: openai.embedding("text-embedding-3-small"),
       value: text,
     });
-
-    console.log("Generated embedding:", embedding);
 
     return new Response(JSON.stringify({ embeddings: embedding }), {
       status: 200,
