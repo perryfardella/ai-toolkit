@@ -27,6 +27,12 @@ export default function Header() {
             >
               Embeddings Generator
             </Link>
+            <Link
+              href="/rag-builder"
+              className="transition-colors hover:text-foreground/80 text-foreground/60"
+            >
+              RAG Builder
+            </Link>
           </nav>
         </div>
       </div>

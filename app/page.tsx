@@ -60,6 +60,21 @@ export default function Home() {
               </Button>
             </CardContent>
           </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>RAG Builder</CardTitle>
+              <CardDescription>
+                Build your own Response Augmented Generation system and query it
+                with natural language
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button asChild className="w-full">
+                <Link href="/rag-builder">Build RAG</Link>
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
