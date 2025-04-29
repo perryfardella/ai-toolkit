@@ -21,6 +21,12 @@ export default function Header() {
             >
               Vibe Checker
             </Link>
+            <Link
+              href="/embeddings-generator"
+              className="transition-colors hover:text-foreground/80 text-foreground/60"
+            >
+              Embeddings Generator
+            </Link>
           </nav>
         </div>
       </div>

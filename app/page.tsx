@@ -46,6 +46,21 @@ export default function Home() {
               </Button>
             </CardContent>
           </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Embeddings Generator</CardTitle>
+              <CardDescription>
+                Generate embeddings for your text and then compare words to find
+                the most similar ones
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button asChild className="w-full">
+                <Link href="/embeddings-generator">Generate Embeddings</Link>
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
