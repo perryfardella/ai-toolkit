@@ -51,8 +51,7 @@ export default function Home() {
             <CardHeader>
               <CardTitle>Embeddings Generator</CardTitle>
               <CardDescription>
-                Generate embeddings for your text and then compare words to find
-                the most similar ones
+                Generate embeddings for your text
               </CardDescription>
             </CardHeader>
             <CardContent>

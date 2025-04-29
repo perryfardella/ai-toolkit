@@ -9,29 +9,35 @@ export default function EmbeddingsGenerator() {
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
   const [embeddings, setEmbeddings] = useState<number[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setEmbeddings(null);
+    setError(null);
 
     try {
-      // TODO: Replace with actual API call
-      // const response = await fetch("/api/embeddings-generator", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ text }),
-      // });
-      // const data = await response.json();
-      // setEmbeddings(data.embeddings);
+      const response = await fetch("/api/embeddings-generator", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text }),
+      });
 
-      // Placeholder for now
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setEmbeddings([0.1, 0.2, 0.3]); // Example embeddings
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Error generating embeddings");
+      }
+
+      setEmbeddings(data.embeddings);
     } catch (error) {
       console.error("Error:", error);
+      setError(
+        error instanceof Error ? error.message : "Error generating embeddings"
+      );
     } finally {
       setLoading(false);
     }
@@ -74,6 +80,17 @@ export default function EmbeddingsGenerator() {
             </form>
           </CardContent>
         </Card>
+
+        {error && (
+          <Card className="mb-8 border-destructive">
+            <CardHeader>
+              <CardTitle className="text-destructive">Error</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-destructive">{error}</div>
+            </CardContent>
+          </Card>
+        )}
 
         {embeddings && (
           <Card>
