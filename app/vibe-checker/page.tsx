@@ -42,7 +42,12 @@ export default function VibeChecker() {
   return (
     <div className="min-h-screen bg-background p-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">Vibe Checker</h1>
+        <div className="mb-12 text-center">
+          <h1 className="text-4xl font-bold tracking-tight">Vibe Checker</h1>
+          <p className="mt-2 text-muted-foreground">
+            Analyze the sentiment and tone of your text
+          </p>
+        </div>
 
         <Card className="mb-8">
           <CardHeader>
