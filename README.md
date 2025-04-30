@@ -10,6 +10,13 @@ A Next.js application built with Vercel's AI SDK to explore and learn about AI c
 - TypeScript for type safety
 - Turbopack for fast development experience
 
+### Pages
+
+- **Chat**: A conversational interface that allows you to interact with AI through natural language, perfect for general queries and discussions.
+- **Vibe Checker**: Analyze the mood and tone of any text input, helping you understand the emotional context of written content.
+- **Embeddings Generator**: Convert text into vector embeddings, which are essential for various AI applications like semantic search and similarity matching.
+- **RAG Builder**: Create and interact with your own Retrieval-Augmented Generation system, allowing you to build custom knowledge bases and query them using natural language.
+
 ## Prerequisites
 
 - Node.js (LTS version recommended)
