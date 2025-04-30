@@ -5,8 +5,28 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+function LoadingDots() {
+  return (
+    <div className="flex space-x-1">
+      <div
+        className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce"
+        style={{ animationDelay: "0ms" }}
+      />
+      <div
+        className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce"
+        style={{ animationDelay: "150ms" }}
+      />
+      <div
+        className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce"
+        style={{ animationDelay: "300ms" }}
+      />
+    </div>
+  );
+}
+
 export default function Chat() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat();
+  const { messages, input, handleInputChange, handleSubmit, isLoading } =
+    useChat();
   return (
     <div className="min-h-screen bg-background p-8">
       <div className="max-w-4xl mx-auto">
@@ -44,6 +64,12 @@ export default function Chat() {
                   })}
                 </div>
               ))}
+              {isLoading && (
+                <div className="p-4 rounded-lg bg-muted max-w-[80%] mr-auto">
+                  <div className="font-semibold mb-1">AI</div>
+                  <LoadingDots />
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>

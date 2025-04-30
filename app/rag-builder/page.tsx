@@ -7,6 +7,25 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 
+function LoadingDots() {
+  return (
+    <div className="flex space-x-1">
+      <div
+        className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce"
+        style={{ animationDelay: "0ms" }}
+      />
+      <div
+        className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce"
+        style={{ animationDelay: "150ms" }}
+      />
+      <div
+        className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce"
+        style={{ animationDelay: "300ms" }}
+      />
+    </div>
+  );
+}
+
 interface StoredData {
   text: string;
   embedding: number[];
@@ -19,12 +38,13 @@ export default function RagBuilder() {
   const [storedData, setStoredData] = useState<Map<string, StoredData>>(
     new Map()
   );
-  const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: "/api/rag-builder/ask",
-    onError: (error) => {
-      setError(error.message);
-    },
-  });
+  const { messages, input, handleInputChange, handleSubmit, isLoading } =
+    useChat({
+      api: "/api/rag-builder/ask",
+      onError: (error) => {
+        setError(error.message);
+      },
+    });
 
   const fetchStoredData = async () => {
     try {
@@ -164,6 +184,12 @@ export default function RagBuilder() {
                     <div>{message.content}</div>
                   </div>
                 ))}
+                {isLoading && (
+                  <div className="p-4 rounded-lg bg-muted max-w-[80%] mr-auto">
+                    <div className="font-semibold mb-1">AI</div>
+                    <LoadingDots />
+                  </div>
+                )}
               </div>
 
               <form onSubmit={handleSubmit} className="flex gap-2">
