@@ -14,7 +14,6 @@ interface StoredData {
 
 export default function RagBuilder() {
   const [text, setText] = useState("");
-  const [embedding, setEmbedding] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [storedData, setStoredData] = useState<Map<string, StoredData>>(
@@ -49,17 +48,27 @@ export default function RagBuilder() {
     setError(null);
 
     try {
-      const embeddingArray = JSON.parse(embedding);
-      if (!Array.isArray(embeddingArray)) {
-        throw new Error("Embedding must be a valid array");
+      // Generate embedding using the embeddings generator API
+      const embeddingResponse = await fetch("/api/embeddings-generator", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text }),
+      });
+
+      if (!embeddingResponse.ok) {
+        throw new Error("Failed to generate embedding");
       }
+
+      const { embeddings } = await embeddingResponse.json();
 
       const response = await fetch("/api/rag-builder/store", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ text, embedding: embeddingArray }),
+        body: JSON.stringify({ text, embedding: embeddings }),
       });
 
       if (!response.ok) {
@@ -68,7 +77,6 @@ export default function RagBuilder() {
 
       // Clear the form and refresh stored data
       setText("");
-      setEmbedding("");
       await fetchStoredData();
     } catch (error) {
       console.error("Error:", error);
@@ -90,7 +98,7 @@ export default function RagBuilder() {
 
         <Card className="mb-8">
           <CardHeader>
-            <CardTitle>Store Text and Embeddings</CardTitle>
+            <CardTitle>Store Text</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleStoreData} className="space-y-4">
@@ -99,12 +107,6 @@ export default function RagBuilder() {
                 onChange={(e) => setText(e.target.value)}
                 placeholder="Enter text to store..."
                 className="min-h-[100px]"
-              />
-              <Textarea
-                value={embedding}
-                onChange={(e) => setEmbedding(e.target.value)}
-                placeholder="Enter embedding array (JSON format)..."
-                className="min-h-[100px] font-mono"
               />
               <Button
                 type="submit"
@@ -126,11 +128,7 @@ export default function RagBuilder() {
               {Array.from(storedData.entries()).map(([id, data]) => (
                 <div key={id} className="p-4 border rounded-lg">
                   <div className="font-semibold mb-2">Text:</div>
-                  <div className="mb-4 whitespace-pre-wrap">{data.text}</div>
-                  <div className="font-semibold mb-2">Embedding:</div>
-                  <div className="font-mono text-sm overflow-x-auto">
-                    {JSON.stringify(data.embedding, null, 2)}
-                  </div>
+                  <div className="whitespace-pre-wrap">{data.text}</div>
                 </div>
               ))}
               {storedData.size === 0 && (
