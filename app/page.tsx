@@ -75,6 +75,32 @@ export default function Home() {
               </Button>
             </CardContent>
           </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Image Generator</CardTitle>
+              <CardDescription>Generate images from text</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button asChild className="w-full">
+                <Link href="/image-generator">Generate Image</Link>
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Deepseek Chat</CardTitle>
+              <CardDescription>
+                Chat with the Deepseek modal specifically
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button asChild className="w-full">
+                <Link href="/deepseek-chat">Chat with Deepseek</Link>
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
