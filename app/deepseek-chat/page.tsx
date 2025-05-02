@@ -24,17 +24,20 @@ function LoadingDots() {
   );
 }
 
-export default function Chat() {
+// TODO: Show responses with markdown formatting
+
+export default function DeepseekChat() {
   const { messages, input, handleInputChange, handleSubmit, isLoading } =
-    // uses the chat route by default (api/chat)
-    useChat();
+    useChat({
+      api: "/api/deepseek-chat",
+    });
   return (
     <div className="min-h-screen bg-background p-8">
       <div className="max-w-4xl mx-auto">
         <div className="mb-12 text-center">
-          <h1 className="text-4xl font-bold tracking-tight">AI Chat</h1>
+          <h1 className="text-4xl font-bold tracking-tight">Deepseek Chat</h1>
           <p className="mt-2 text-muted-foreground">
-            Have a conversation with our AI assistant
+            Have a conversation with the Deepseek model
           </p>
         </div>
 

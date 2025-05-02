@@ -92,7 +92,7 @@ export default function Home() {
             <CardHeader>
               <CardTitle>Deepseek Chat</CardTitle>
               <CardDescription>
-                Chat with the Deepseek modal specifically
+                Chat with the Deepseek model specifically
               </CardDescription>
             </CardHeader>
             <CardContent>
