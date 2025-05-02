@@ -33,6 +33,18 @@ export default function Header() {
             >
               RAG Builder
             </Link>
+            <Link
+              href="/image-generator"
+              className="transition-colors hover:text-foreground/80 text-foreground/60"
+            >
+              Image Generator
+            </Link>
+            <Link
+              href="/deepseek-chat"
+              className="transition-colors hover:text-foreground/80 text-foreground/60"
+            >
+              Deepseek Chat
+            </Link>
           </nav>
         </div>
       </div>
