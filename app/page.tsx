@@ -115,6 +115,21 @@ export default function Home() {
               </Button>
             </CardContent>
           </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Text to Speech</CardTitle>
+              <CardDescription>
+                Convert text into natural-sounding speech with different voice
+                options
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button asChild className="w-full">
+                <Link href="/text-to-speech">Convert to Speech</Link>
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

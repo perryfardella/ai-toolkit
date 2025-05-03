@@ -51,6 +51,12 @@ export default function Header() {
             >
               Recipe Generator
             </Link>
+            <Link
+              href="/text-to-speech"
+              className="transition-colors hover:text-foreground/80 text-foreground/60"
+            >
+              Text to Speech
+            </Link>
           </nav>
         </div>
       </div>
