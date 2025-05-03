@@ -15,6 +15,15 @@ interface Recipe {
   ingredients: string[];
   instructions: string[];
   tips?: string[];
+  nutrition: {
+    calories: number;
+    protein: number;
+    fat: number;
+    carbohydrates: number;
+    fiber: number;
+    sugar: number;
+    sodium: number;
+  };
 }
 
 export default function RecipeGenerator() {
@@ -113,6 +122,57 @@ export default function RecipeGenerator() {
                 <div>Prep Time: {recipe.prepTime}</div>
                 <div>Cook Time: {recipe.cookTime}</div>
                 <div>Servings: {recipe.servings}</div>
+              </div>
+              <div className="mt-4">
+                <div className="text-lg font-semibold">Macros per Serving</div>
+                <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="p-3 bg-muted rounded-lg">
+                    <div className="text-sm text-muted-foreground">
+                      Calories
+                    </div>
+                    <div className="text-lg font-semibold">
+                      {recipe.nutrition.calories}
+                    </div>
+                  </div>
+                  <div className="p-3 bg-muted rounded-lg">
+                    <div className="text-sm text-muted-foreground">Protein</div>
+                    <div className="text-lg font-semibold">
+                      {recipe.nutrition.protein}g
+                    </div>
+                  </div>
+                  <div className="p-3 bg-muted rounded-lg">
+                    <div className="text-sm text-muted-foreground">Fat</div>
+                    <div className="text-lg font-semibold">
+                      {recipe.nutrition.fat}g
+                    </div>
+                  </div>
+                  <div className="p-3 bg-muted rounded-lg">
+                    <div className="text-sm text-muted-foreground">Carbs</div>
+                    <div className="text-lg font-semibold">
+                      {recipe.nutrition.carbohydrates}g
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-2 grid grid-cols-2 md:grid-cols-3 gap-4">
+                  <div className="p-3 bg-muted rounded-lg">
+                    <div className="text-sm text-muted-foreground">Fiber</div>
+                    <div className="text-lg font-semibold">
+                      {recipe.nutrition.fiber}g
+                    </div>
+                  </div>
+                  <div className="p-3 bg-muted rounded-lg">
+                    <div className="text-sm text-muted-foreground">Sugar</div>
+                    <div className="text-lg font-semibold">
+                      {recipe.nutrition.sugar}g
+                    </div>
+                  </div>
+                  <div className="p-3 bg-muted rounded-lg">
+                    <div className="text-sm text-muted-foreground">Sodium</div>
+                    <div className="text-lg font-semibold">
+                      {recipe.nutrition.sodium}mg
+                    </div>
+                  </div>
+                </div>
               </div>
             </CardHeader>
             <CardContent className="space-y-6">

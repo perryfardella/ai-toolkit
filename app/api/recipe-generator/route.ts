@@ -37,6 +37,19 @@ const recipeSchema = z.object({
     .describe(
       "Optional cooking tips, substitution suggestions, or storage recommendations"
     ),
+  nutrition: z
+    .object({
+      calories: z.number().describe("Total calories per serving"),
+      protein: z.number().describe("Protein content in grams per serving"),
+      fat: z.number().describe("Total fat content in grams per serving"),
+      carbohydrates: z
+        .number()
+        .describe("Total carbohydrates in grams per serving"),
+      fiber: z.number().describe("Dietary fiber in grams per serving"),
+      sugar: z.number().describe("Total sugar content in grams per serving"),
+      sodium: z.number().describe("Sodium content in milligrams per serving"),
+    })
+    .describe("Nutritional information per serving"),
 });
 
 export const maxDuration = 30;
