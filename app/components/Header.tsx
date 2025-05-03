@@ -1,63 +1,78 @@
+"use client";
+
 import Link from "next/link";
+import { useState, useEffect, useRef } from "react";
+import { ChevronDown } from "lucide-react";
 
 export default function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const navLinks = [
+    { href: "/chat", label: "Chat" },
+    { href: "/vibe-checker", label: "Vibe Checker" },
+    { href: "/embeddings-generator", label: "Embeddings Generator" },
+    { href: "/rag-builder", label: "RAG Builder" },
+    { href: "/image-generator", label: "Image Generator" },
+    { href: "/deepseek-chat", label: "Deepseek Chat" },
+    { href: "/recipe-generator", label: "Recipe Generator" },
+    { href: "/text-to-speech", label: "Text to Speech" },
+  ];
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center px-4 sm:px-6">
-        <div className="mr-4 flex">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
-            <span className="font-bold">AI Toolkit</span>
-          </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium">
-            <Link
-              href="/chat"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Chat
-            </Link>
-            <Link
-              href="/vibe-checker"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Vibe Checker
-            </Link>
-            <Link
-              href="/embeddings-generator"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Embeddings Generator
-            </Link>
-            <Link
-              href="/rag-builder"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              RAG Builder
-            </Link>
-            <Link
-              href="/image-generator"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Image Generator
-            </Link>
-            <Link
-              href="/deepseek-chat"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Deepseek Chat
-            </Link>
-            <Link
-              href="/recipe-generator"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Recipe Generator
-            </Link>
-            <Link
-              href="/text-to-speech"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Text to Speech
-            </Link>
-          </nav>
+      <div className="container flex h-14 items-center justify-between px-4 sm:px-6 max-w-7xl mx-auto">
+        <Link href="/" className="flex items-center space-x-2">
+          <span className="font-bold">AI Toolkit</span>
+        </Link>
+
+        <div className="relative" ref={dropdownRef}>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="flex items-center space-x-1 text-sm font-semibold text-foreground hover:text-foreground/80 transition-colors cursor-pointer"
+            aria-label="Toggle tools menu"
+          >
+            <span>Tools</span>
+            <ChevronDown
+              size={16}
+              className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
+            />
+          </button>
+
+          {isOpen && (
+            <nav className="absolute top-full right-0 mt-1 w-56 rounded-md border bg-background shadow-lg">
+              <div className="p-2">
+                <div className="flex flex-col space-y-1">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="rounded-md px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </nav>
+          )}
         </div>
       </div>
     </header>
