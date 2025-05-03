@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Loader2 } from "lucide-react";
 
 interface Recipe {
@@ -28,6 +29,7 @@ interface Recipe {
 
 export default function RecipeGenerator() {
   const [foodItem, setFoodItem] = useState("");
+  const [additionalInfo, setAdditionalInfo] = useState("");
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -46,7 +48,7 @@ export default function RecipeGenerator() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ foodItem }),
+        body: JSON.stringify({ foodItem, additionalInfo }),
       });
 
       if (!response.ok) {
@@ -80,15 +82,24 @@ export default function RecipeGenerator() {
             <CardTitle>Generate a Recipe</CardTitle>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="flex gap-2">
-              <Input
-                value={foodItem}
-                onChange={(e) => setFoodItem(e.target.value)}
-                placeholder="Enter a food item (e.g., chocolate chip cookies, beef stew)..."
-                className="flex-1"
-                disabled={loading}
-              />
-              <Button type="submit" disabled={loading}>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Input
+                  value={foodItem}
+                  onChange={(e) => setFoodItem(e.target.value)}
+                  placeholder="Enter a food item (e.g., chocolate chip cookies, beef stew)..."
+                  className="flex-1"
+                  disabled={loading}
+                />
+                <Textarea
+                  value={additionalInfo}
+                  onChange={(e) => setAdditionalInfo(e.target.value)}
+                  placeholder="Add any preferences or requirements (e.g., 'high protein', 'gluten-free', 'serves 4', 'nut-free')..."
+                  className="min-h-[100px]"
+                  disabled={loading}
+                />
+              </div>
+              <Button type="submit" disabled={loading} className="w-full">
                 {loading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -187,13 +198,11 @@ export default function RecipeGenerator() {
 
               <div>
                 <h3 className="text-lg font-semibold mb-2">Instructions</h3>
-                <div className="space-y-4">
+                <ol className="list-decimal pl-6 space-y-2">
                   {recipe.instructions.map((instruction, index) => (
-                    <div key={index} className="text-foreground">
-                      {instruction}
-                    </div>
+                    <li key={index}>{instruction}</li>
                   ))}
-                </div>
+                </ol>
               </div>
 
               {recipe.tips && recipe.tips.length > 0 && (

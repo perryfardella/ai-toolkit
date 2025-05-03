@@ -56,7 +56,7 @@ export const maxDuration = 30;
 
 export async function POST(req: Request) {
   try {
-    const { foodItem } = await req.json();
+    const { foodItem, additionalInfo } = await req.json();
 
     if (!foodItem) {
       return new Response(JSON.stringify({ error: "Food item is required" }), {
@@ -68,8 +68,12 @@ export async function POST(req: Request) {
     const { object: recipe } = await generateObject({
       model: openai("gpt-3.5-turbo"),
       schema: recipeSchema,
-      prompt: `Generate a detailed recipe for ${foodItem}. Include a title, description, prep time, cook time, number of servings, list of ingredients, step-by-step instructions, and optional cooking tips. Use metric units. If the prompt is not clear, just return "No recipe found"`,
-      system: `You are a professional chef and recipe writer. Create a detailed, easy-to-follow recipe that is both delicious and practical. Make sure to include all necessary information and be precise with measurements and instructions.`,
+      prompt: `Generate a detailed recipe for ${foodItem}. ${
+        additionalInfo
+          ? `Consider these additional requirements: ${additionalInfo}.`
+          : ""
+      } Include a title, description, prep time, cook time, number of servings, list of ingredients, step-by-step instructions (not numbered), and optional cooking tips. Use metric units. If the prompt is not clear, just return "No recipe found"`,
+      system: `You are a professional chef and recipe writer. Create a detailed, easy-to-follow recipe that is both delicious and practical. Make sure to include all necessary information and be precise with measurements and instructions. Consider any dietary restrictions or preferences provided by the user.`,
     });
 
     return new Response(JSON.stringify(recipe), {
