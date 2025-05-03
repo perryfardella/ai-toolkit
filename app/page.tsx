@@ -101,6 +101,20 @@ export default function Home() {
               </Button>
             </CardContent>
           </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Recipe Generator</CardTitle>
+              <CardDescription>
+                Generate recipes from ingredients (structured output generation)
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button asChild className="w-full">
+                <Link href="/recipe-generator">Generate Recipe</Link>
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

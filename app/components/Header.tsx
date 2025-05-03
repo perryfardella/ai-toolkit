@@ -45,6 +45,12 @@ export default function Header() {
             >
               Deepseek Chat
             </Link>
+            <Link
+              href="/recipe-generator"
+              className="transition-colors hover:text-foreground/80 text-foreground/60"
+            >
+              Recipe Generator
+            </Link>
           </nav>
         </div>
       </div>
