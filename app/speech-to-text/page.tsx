@@ -120,7 +120,7 @@ export default function SpeechToText() {
                 onClick={isRecording ? stopRecording : startRecording}
                 variant={isRecording ? "destructive" : "default"}
                 size="lg"
-                className="w-32"
+                className="w-32 hover:cursor-pointer"
                 disabled={isLoading}
               >
                 {isLoading ? (
