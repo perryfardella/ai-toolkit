@@ -138,7 +138,7 @@ export default function Home() {
             </CardHeader>
             <CardContent>
               <Button asChild className="w-full">
-                <Link href="/transcribe-audio">Transcribe Audio</Link>
+                <Link href="/speech-to-text">Transcribe Audio</Link>
               </Button>
             </CardContent>
           </Card>
