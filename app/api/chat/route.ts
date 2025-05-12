@@ -5,11 +5,18 @@ import { streamText } from "ai";
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
-  const { messages } = await req.json();
+  const { messages, internetSearch = false } = await req.json();
 
   const result = streamText({
-    model: openai("gpt-3.5-turbo"),
+    model: internetSearch
+      ? openai.responses("gpt-4o")
+      : openai("gpt-3.5-turbo"),
     messages,
+    tools: internetSearch
+      ? {
+          web_search_preview: openai.tools.webSearchPreview(),
+        }
+      : undefined,
   });
 
   return result.toDataStreamResponse();

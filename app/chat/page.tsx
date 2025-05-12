@@ -4,6 +4,8 @@ import { useChat } from "@ai-sdk/react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { Globe, Search, X } from "lucide-react";
 
 function LoadingDots() {
   return (
@@ -25,9 +27,15 @@ function LoadingDots() {
 }
 
 export default function Chat() {
+  const [internetSearchEnabled, setInternetSearchEnabled] = useState(false);
   const { messages, input, handleInputChange, handleSubmit, isLoading } =
     // uses the chat route by default (api/chat)
-    useChat();
+    useChat({
+      body: {
+        internetSearch: internetSearchEnabled,
+      },
+    });
+
   return (
     <div className="min-h-screen bg-background p-8">
       <div className="max-w-4xl mx-auto">
@@ -75,16 +83,44 @@ export default function Chat() {
           </CardContent>
         </Card>
 
-        <form onSubmit={handleSubmit} className="flex gap-2">
-          <Input
-            value={input}
-            placeholder="Say something..."
-            onChange={handleInputChange}
-            className="flex-1"
-          />
-          <Button type="submit" className="cursor-pointer">
-            Send
-          </Button>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <div className="flex gap-2">
+            <Input
+              value={input}
+              placeholder="Say something..."
+              onChange={handleInputChange}
+              className="flex-1"
+            />
+            <Button type="submit" className="cursor-pointer">
+              <Search className="h-4 w-4 mr-2" />
+              Send
+            </Button>
+          </div>
+
+          <div className="flex items-center justify-end text-sm">
+            {internetSearchEnabled ? (
+              <div
+                className="flex items-center gap-2 text-primary hover:text-primary/80 cursor-pointer transition-colors"
+                onClick={() => setInternetSearchEnabled(false)}
+                role="button"
+                tabIndex={0}
+              >
+                <Globe className="h-3.5 w-3.5" />
+                <span>Web browsing: On</span>
+                <X className="h-3.5 w-3.5" />
+              </div>
+            ) : (
+              <div
+                className="flex items-center gap-2 text-muted-foreground hover:text-foreground cursor-pointer transition-colors"
+                onClick={() => setInternetSearchEnabled(true)}
+                role="button"
+                tabIndex={0}
+              >
+                <Globe className="h-3.5 w-3.5" />
+                <span>Web browsing: Off</span>
+              </div>
+            )}
+          </div>
         </form>
       </div>
     </div>
