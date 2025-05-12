@@ -142,21 +142,6 @@ export default function Home() {
               </Button>
             </CardContent>
           </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Internet Search Chat</CardTitle>
-              <CardDescription>
-                Chat with an AI that has the ability to search the internet with
-                SerpAPI
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button asChild className="w-full">
-                <Link href="/internet-search-chat">Chat with the Internet</Link>
-              </Button>
-            </CardContent>
-          </Card>
         </div>
       </div>
     </div>

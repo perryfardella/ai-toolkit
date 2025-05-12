@@ -34,7 +34,6 @@ export default function Header() {
     { href: "/recipe-generator", label: "Recipe Generator" },
     { href: "/text-to-speech", label: "Text to Speech" },
     { href: "/transcribe-audio", label: "Transcribe Audio" },
-    { href: "/internet-search-chat", label: "Internet Search Chat" },
   ];
 
   return (
