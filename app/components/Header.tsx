@@ -71,17 +71,17 @@ export default function Header() {
         </Link>
 
         <div className="flex items-center space-x-4">
-          {isAuthenticated && (
+          {isAuthenticated ? (
             <Button
               variant="ghost"
               size="sm"
               onClick={handleLogout}
-              className="flex items-center space-x-1"
+              className="flex items-center space-x-1 hover:cursor-pointer"
             >
               <LogOut size={16} />
               <span>Logout</span>
             </Button>
-          )}
+          ) : null}
 
           <div className="relative" ref={dropdownRef}>
             <button
