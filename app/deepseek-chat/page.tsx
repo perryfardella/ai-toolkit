@@ -4,6 +4,7 @@ import { useChat } from "@ai-sdk/react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import ReactMarkdown from "react-markdown";
 
 function LoadingDots() {
   return (
@@ -61,8 +62,15 @@ export default function DeepseekChat() {
                   {message.parts.map((part, i) => {
                     switch (part.type) {
                       case "text":
-                        return (
+                        return message.role === "user" ? (
                           <div key={`${message.id}-${i}`}>{part.text}</div>
+                        ) : (
+                          <div
+                            key={`${message.id}-${i}`}
+                            className="markdown-content"
+                          >
+                            <ReactMarkdown>{part.text}</ReactMarkdown>
+                          </div>
                         );
                     }
                   })}
