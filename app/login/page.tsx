@@ -47,8 +47,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen bg-background flex justify-center p-4">
+      <Card className="w-full max-w-md max-h-fit">
         <CardHeader>
           <CardTitle className="text-2xl">AI Toolkit Login</CardTitle>
           <CardDescription>
