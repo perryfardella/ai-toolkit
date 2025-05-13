@@ -39,12 +39,13 @@ A Next.js application built with Vercel's AI SDK to explore and learn about AI c
 
 2. Create a `.env.local` file in the root directory and add your OpenAI & Deepseek API key:
 
-   ```
+   ```env
    OPENAI_API_KEY=your_api_key_here
    DEEPSEEK_API_KEY=your_api_key_here
    ```
 
 3. Start the development server:
+
    ```bash
    pnpm dev
    ```
