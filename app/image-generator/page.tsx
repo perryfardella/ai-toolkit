@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+import Image from "next/image";
 
 export default function ImageGenerator() {
   const [prompt, setPrompt] = useState("");
@@ -101,10 +102,12 @@ export default function ImageGenerator() {
             {imageData && (
               <div className="space-y-4">
                 <div className="relative aspect-square w-full max-w-2xl mx-auto">
-                  <img
+                  <Image
                     src={`data:${imageData.mimeType};base64,${imageData.base64Data}`}
                     alt="Generated image"
-                    className="rounded-lg object-contain w-full h-full"
+                    className="rounded-lg object-contain"
+                    fill
+                    priority
                   />
                 </div>
                 <div className="text-center">
