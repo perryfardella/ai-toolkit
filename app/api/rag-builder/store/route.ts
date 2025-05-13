@@ -1,12 +1,10 @@
 import { NextResponse } from "next/server";
-
-// In-memory storage for our RAG system
-export const storage = new Map<string, { text: string; embedding: number[] }>();
+import { getAllEntries, addEntry } from "@/app/lib/rag-storage";
 
 export async function GET() {
   try {
-    // Convert Map to plain object for JSON serialization
-    const data = Object.fromEntries(storage);
+    // Get all entries from the storage utility
+    const data = getAllEntries();
     return NextResponse.json(data);
   } catch (error) {
     console.error("Error fetching stored data:", error);
@@ -28,9 +26,8 @@ export async function POST(req: Request) {
       );
     }
 
-    // Generate a unique ID for this entry
-    const id = Math.random().toString(36).substring(7);
-    storage.set(id, { text, embedding });
+    // Add entry using the storage utility
+    const id = addEntry(text, embedding);
 
     return NextResponse.json({ success: true, id });
   } catch (error) {

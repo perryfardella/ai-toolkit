@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import { openai } from "@ai-sdk/openai";
 import { embed, streamText, cosineSimilarity } from "ai";
 
-// Import the storage from the store route
-import { storage } from "../store/route";
+// Import the storage from the utility file
+import { storage } from "@/app/lib/rag-storage";
 
 export async function POST(req: Request) {
   try {
