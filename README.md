@@ -12,7 +12,7 @@ A Next.js application built with Vercel's AI SDK to explore and learn about AI c
 
 ### Pages
 
-- **Chat**: A conversational interface that allows you to interact with AI through natural language, perfect for general queries and discussions.
+- **Chat**: A conversational interface that allows you to interact with AI through natural language, perfect for general queries and discussions. Includes real-time internet search capabilities for up-to-date information.
 - **Vibe Checker**: Analyze the mood and tone of any text input, helping you understand the emotional context of written content.
 - **Embeddings Generator**: Convert text into vector embeddings, which are essential for various AI applications like semantic search and similarity matching.
 - **RAG Builder**: Create and interact with your own Retrieval-Augmented Generation system, allowing you to build custom knowledge bases and query them using natural language.
@@ -21,7 +21,6 @@ A Next.js application built with Vercel's AI SDK to explore and learn about AI c
 - **Recipe Generator**: Create detailed recipes from ingredients, including preparation time, cooking time, servings, ingredients list, step-by-step instructions, and nutritional information.
 - **Text to Speech**: Convert text into natural-sounding speech with multiple voice options, including Alloy, Echo, Fable, Onyx, Nova, and Shimmer.
 - **Speech to Text** : Convert audio into text.
-- **Internet Search Chat**: Chat with AI while having access to real-time internet search capabilities for up-to-date information.
 
 ## Prerequisites
 
